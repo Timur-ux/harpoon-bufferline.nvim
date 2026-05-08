@@ -21,6 +21,7 @@ _[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
 - [x] sync harpooned buffers and with specified bufferline group 
 - [ ] collapse empty positions in harpoon internal storage when buffer removed
 - [ ] sort harpooned buffers inside bufferline group as they placed in harpoon storage
+- [ ] set lazy load trigger to load after harpoon plugin
 
 ## 📋 Installation
 
@@ -49,6 +50,7 @@ _[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
     "akinsho/bufferline.nvim",
 	},
 	opts = {},
+	lazy = false, -- TODO: Set loading after harpoon module
 	keys = {
 		{
 			-- custom clear list call due to require("harpoon"):list():clear() don't call any callbacks
