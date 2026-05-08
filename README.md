@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-		Add harpooned buffer to bufferline group easy
+		Add harpooned buffers to bufferline group easy
 </p>
 
 <div align="center">
@@ -19,7 +19,7 @@ _[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
 ## ⚡️ Features
 
 - [x] sync harpooned buffers and with specified bufferline group 
-- [ ] fit harpoon internal buffers storage when buffer removed
+- [ ] collapse empty positions in harpoon internal storage when buffer removed
 - [ ] sort harpooned buffers inside bufferline group as they placed in harpoon storage
 
 ## 📋 Installation
@@ -43,12 +43,23 @@ _[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
 
 ```lua
 {
-	"harpoon-bufferline.nvim",
+	"Timur-ux/harpoon-bufferline.nvim",
 	dependencies = {
     "ThePrimeagen/harpoon",
     "akinsho/bufferline.nvim",
-	}
-	opts = {}
+	},
+	opts = {},
+	keys = {
+		{
+			-- custom clear list call due to require("harpoon"):list():clear() don't call any callbacks
+			"<leader>hc",
+			function()
+				require("harpoon-bufferline").clearList()
+			end,
+			mode = { "n" },
+			desc = "Harpoon: clear list",
+		},
+	},
 }
 ```
 

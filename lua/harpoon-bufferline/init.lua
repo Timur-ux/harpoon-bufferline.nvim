@@ -4,10 +4,10 @@ local function GetAbsPath(path)
     end
     return vim.fn.getcwd() .. "/" .. path
 end
+
 ---@param item HarpoonListItem
-local function GetBufferLineBufferFromHarpoonItem(item)
+local function GetBufferLineBufferFromHarpoonItem(bufferline, item)
     local absPath = GetAbsPath(item.value)
-    print("Search for buffer: " .. absPath)
     for _, bufferElement in ipairs(bufferline.get_elements().elements) do
         if bufferElement.path == absPath then
             return bufferElement
@@ -20,10 +20,24 @@ local config = require("harpoon-bufferline.config")
 
 local HarpoonBufferline = {}
 
+-- proper way to clear harpoon list with bufferline sync
+function HarpoonBufferline.clearList() 
+	local list = require("harpoon"):list()
+	local len = list:length()
+	for i = 1, len do
+		local item = list:get(i)
+		if item then 
+			list:remove(item)
+		end
+	end
+	list:clear()
+end
+
 -- setup HarpoonBufferline, assume that harpoon2 and bufferline already setuped
 function HarpoonBufferline.setup(opts)
     opts = opts or {}
     local group = opts.group or config.DEFAULT_GROUP
+		HarpoonBufferline.group = group
     local harpoon = require("harpoon")
     local bufferline = require("bufferline")
 
@@ -31,7 +45,7 @@ function HarpoonBufferline.setup(opts)
     harpoon:extend({
         ADD = function(ctx)
             local item = ctx.item
-            local buffer = GetBufferLineBufferFromHarpoonItem(item)
+            local buffer = GetBufferLineBufferFromHarpoonItem(bufferline, item)
             if not buffer then
                 log.notify(
                     "setup",
@@ -42,11 +56,10 @@ function HarpoonBufferline.setup(opts)
                 return
             end
             bufferline.groups.add_element(group, buffer)
-            log.debug("setup", "Susseccfully add buffer: %s to %s group", item.value, group)
         end,
         REMOVE = function(ctx)
             local item = ctx.item
-            local buffer = GetBufferLineBufferFromHarpoonItem(item)
+            local buffer = GetBufferLineBufferFromHarpoonItem(bufferline, item)
             if not buffer then
                 log.notify(
                     "setup",
@@ -57,7 +70,6 @@ function HarpoonBufferline.setup(opts)
                 return
             end
             bufferline.groups.remove_element(group, buffer)
-            log.debug("setup", "Susseccfully remove buffer: %s from %s group", item.value, group)
         end,
     })
 end
