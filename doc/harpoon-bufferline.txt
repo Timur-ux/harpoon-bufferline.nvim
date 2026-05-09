@@ -9,9 +9,13 @@ Type ~
 Default values:
 >lua
   HarpoonBufferline.options = {
-    group = "pinned" -- bufferline's group name add harpooned buffers to
+    -- bufferline's group name add harpooned buffers to
+    group = "pinned" 
+    -- force buffers match harpoon buffers order
+    order_bufferline_as_harpoon = true, 
+    -- remove empty spaces in harpoon buffers storage when buffers are removed
+    fit_harpoon_storage_on_remove = true 
   }
-
 <
 ------------------------------------------------------------------------------
                                                      *HarpoonBufferline.setup()*

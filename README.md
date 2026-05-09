@@ -19,8 +19,8 @@ _[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
 ## ⚡️ Features
 
 - [x] sync harpooned buffers and with specified bufferline group 
-- [ ] collapse empty positions in harpoon internal storage when buffer removed
-- [ ] sort harpooned buffers inside bufferline group as they placed in harpoon storage
+- [x] collapse empty positions in harpoon internal storage when buffer removed
+- [x] sort harpooned buffers inside bufferline group as they placed in harpoon storage
 - [ ] set lazy load trigger to load after harpoon plugin
 
 ## 📋 Installation
@@ -85,7 +85,11 @@ No special actions needed. By default all added to harpoon list buffers marks as
 require("harpoon-bufferline").setup({
 	-- bufferline group to sync with harpoon. "pinned" group created by bufferline
 	-- If you want use other group make sure that it is created
-	group = "pinned"
+	group = "pinned" 
+	-- force buffers in bufferline group match harpoon buffers order
+	order_bufferline_as_harpoon = true, 
+	-- remove empty spaces in harpoon buffers storage when buffers are removed
+	fit_harpoon_storage_on_remove = true 
 })
 ```
 
