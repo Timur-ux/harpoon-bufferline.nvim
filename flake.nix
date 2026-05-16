@@ -17,12 +17,13 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        packages.default = pkgs.vimUtils.buildVimPlugin {
+				plugin = pkgs.vimUtils.buildVimPlugin {
 					 name = "harpoon-bufferline";
 					 src = ./.;
 				 };
-      }
+      in
+      {
+				packages.default = plugin;
+			}
     );
 }
