@@ -8,9 +8,7 @@
 
 <div align="center">
 
-> Videos don't work on GitHub mobile, so a GIF alternative can help users.
-
-_[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
+https://github.com/user-attachments/assets/169d6521-f7f3-46af-91c3-37a0852d7665
 
 </div>
 
@@ -40,7 +38,7 @@ _[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
 [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
 
 </td>
-<td>
+<td align="left">
 
 ```lua
 {
@@ -53,7 +51,8 @@ _[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
 	lazy = false, -- TODO: Set loading after harpoon module
 	keys = {
 		{
-			-- custom clear list call due to require("harpoon"):list():clear() don't call any callbacks
+			-- custom clear list call due to require("harpoon"):list():clear()
+			-- don't call any callbacks to handle clearing with bufferline sync
 			"<leader>hc",
 			function()
 				require("harpoon-bufferline").clearList()
@@ -77,8 +76,6 @@ No special actions needed. By default all added to harpoon list buffers marks as
 
 ## ⚙ Configuration
 
-> The configuration list sometimes become cumbersome, making it folded by default reduce the noise of the README file.
->
 > **Note**: The options are also available in Neovim by calling `:h harpoon-bufferline.options`
 
 ```lua
